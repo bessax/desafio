@@ -75,5 +75,22 @@ namespace PooLojaVirtual.Tests
             carrinho.Remover(produto.Id);
             Assert.Empty(carrinho.Itens);
         }
+
+        [Fact]
+        public void Carrinho_Nao_Deve_Duplicar_Produtos(){
+
+            var carrinho = new Carrinho();
+            var produto= new Produto();
+            produto.Id=1;
+            produto.Nome="SmartPhone";
+            produto.Preco=799;
+
+            carrinho.Adicionar(produto,1);
+            carrinho.Adicionar(produto,1);
+
+            Assert.Equal(1,carrinho.Itens.Count());
+            Assert.Equal(1598,carrinho.Total);
+
+        }
     }
 }
